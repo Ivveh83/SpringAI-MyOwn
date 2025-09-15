@@ -1,4 +1,4 @@
-package se.lexicon.todo_app.exception;
+package se.lexicon.springaimyown.exception;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

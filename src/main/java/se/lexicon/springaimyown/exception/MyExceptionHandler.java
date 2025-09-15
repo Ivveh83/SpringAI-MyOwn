@@ -1,10 +1,11 @@
-package se.lexicon.todo_app.exception;
+package se.lexicon.springaimyown.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
@@ -74,6 +75,12 @@ public class MyExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException ex) {
         System.out.println("HandleAuthenticationException: " + ex.getMessage());
         return createErrorResponse(HttpStatus.UNAUTHORIZED, "Authentication failed: " + ex.getMessage());
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ErrorResponse> handleHandlerMethodValidationException(HandlerMethodValidationException ex) {
+        System.out.println("HandleHandlerMethodValidationException: " + ex.getMessage());
+        return createErrorResponse(HttpStatus.BAD_REQUEST, "Question is either null or longer than 200 chars");
     }
 
 
